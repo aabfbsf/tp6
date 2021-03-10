@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/static/clear/clear.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <link rel="stylesheet" href="/static/clear/clear.css">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="/static/js/axios.js"></script>
+    <script src="/static/js/jq.js"></script>
+    <link  href="/static/layui/css/layui.mobile.css">
+    <script src="/static/layui/layui.all.js"></script>
+
+
+</head>
+<style>
+    input{
+        width: 5rem;
+        font-size: small;
+    }
+    #login{
+        margin-top: 40%;
+    }
+    .zc{
+        font-size: .3rem;
+        color: #646566;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: .35rem;
+    }
+    a{
+        outline: none;
+        color: #646566;
+    }
+</style>
+<body>
+<div id="login">
+    <van-form @submit="onSubmit">
+        <van-field
+                v-model="username"
+                name="username"
+                label="用户名"
+                placeholder="用户名"
+                :rules="[{ required: true, message: '请填写用户名' }]"></van-field>
+        <van-field
+                v-model="password"
+                type="password"
+                name="password"
+                label="密码"
+                placeholder="密码"
+                :rules="[{ required: true, message: '请填写密码' }]"></van-field>
+        <div style="margin: 16px;">
+            <van-button round block type="info" native-type="submit">注册</van-button>
+        </div>
+        <span class="zc"><a href="{:url('Login/login/index')}">登录</a></span>
+    </van-form>
+</div>
+</body>
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    // $(function(){
+    //     $("#su").click(function(){
+    //         $.ajax({
+    //             url:"{:url('login/Login/zcs')}",
+    //             data:{
+    //                 username:$("#username").val(),
+    //                 password:$("#password").val(),
+    //             },
+    //             success:function(data){
+    //                 console.log(data);
+    //                 if(data=='url'){
+    //                     window.location.href="{:url('admin/Index/index')}"
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+    new Vue({
+        el:"#login",
+        data(){
+            return{
+                username:'',
+                password:'',
+            }
+        },
+        methods:{
+            onSubmit(values) {
+                console.log(values);
+                axios.post("/index.php/login/Login/login",{
+                    username:values.username,
+                    password:values.password,
+                }).then(data=>{
+                    console.log(data);
+                    if(data.data==="url"){
+                        layer.msg("注册成功!");
+                        setTimeout(()=>{
+                            window.location.href="{:url('admin/Index/index')}";
+                        },3000);
+                    }else if(data.data==='ycz'){
+                        layer.msg('该用户已存在~');
+                        setTimeout(()=>{
+                            window.location.href="{:url('Login/login/zc')}"
+                        },2000)
+
+                    }else{
+                        layer.msg(data.data);
+                    }
+                });
+            },
+        },
+    });
+    });
+</script>
+</html>

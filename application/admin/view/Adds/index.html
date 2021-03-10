@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/static/clear/clear.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <link rel="stylesheet" href="/static/clear/clear.css">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="/static/js/axios.js"></script>
+    <script src="/static/js/jq.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    html{
+        /*background: #455A6499;*/
+    }
+.ts{
+    /*background: none;*/
+    background: red;
+    width: 100%;
+}
+.ts2{
+
+}
+.forms>*{
+    font-size: .2rem;
+    /*width: 100%;*/
+    /*width: 100%;*/
+}
+.input-group{
+    margin-top: .4rem;
+}
+.bs-example-form{
+}
+
+.test>button>input{
+    background: none;
+    outline: none;
+    border: none;
+    outline:0 none !important; blr:expression(this.onFocus=this.blur());
+}
+#add{
+    margin-top: 38%;
+}
+</style>
+<body>
+<div id="add">
+    <form  action="{:url('admin/Adds/img')}" class="bs-example bs-example-form" role="form" enctype="multipart/form-data" method="post">
+        <!--商品名-->
+        <div class="input-group">
+            <span class="input-group-addon">商品名称:</span>
+            <input type="text" class="form-control" placeholder="shopname" name="shopname">
+        </div>
+        <!--简介-->
+        <div class="input-group">
+            <span class="input-group-addon">商品简介:</span>
+            <input type="text" class="form-control" placeholder="introduce" name="shopjj">
+        </div>
+        <!--手机-->
+        <div class="input-group">
+            <span class="input-group-addon">手机号:</span>
+            <input type="text" class="form-control" placeholder="phonenumber" name="shopnumber">
+        </div>
+        <!--价格-->
+        <div class="input-group">
+            <span class="input-group-addon">价格:</span>
+            <input type="text" class="form-control" placeholder="price" name="shopqian">
+        </div>
+        <!--地址-->
+        <div class="input-group">
+            <span class="input-group-addon">地址:</span>
+            <input type="text" class="form-control" placeholder="address" name="shopaddress">
+        </div>
+        <input id="lefile" type="file" style="display:none">
+        <!--图片-->
+        <div class="input-group">
+            <span class="input-group-addon">图片:</span>
+            <input id="photoCover" class="input-large " type="file" style="height:30px;" placeholder="image" name="image" >
+        </div>
+        <div class="btn-group btn-group-lg test" style="margin-top: .2rem;display: flex;justify-content: center;">
+            <button type="button" class="btn btn-default" id="buttons" style="width: 100%"><input type="submit" style="width: 100%" id="sbus"></button>
+        </div>
+    </form>
+
+</div>
+</body>
+<script>
+    $(function(){
+        $('input[id=lefile]').change(function() {
+            console.log($('#photoCover').val($(this).val()));
+        });
+        $("#sbus").submit(function(){
+            console.log($("#photoCover").val());
+        });
+    });
+    new Vue({
+       el:"#add",
+       data(){
+           return{
+           }
+       },
+        methods:{
+            afterRead(file) {
+                // 此时可以自行将文件上传至服务器
+                console.log(file.file);
+                axios.post("{:url('admin/Adds/img')}",{
+                    ddd:(file.file),
+                }).then(res=>{
+                    console.log(res);
+                }).catch(rbs=>{
+                    console.log(rbs);
+                })
+            },
+            onSubmit(values) {
+                console.log(values);
+                axios.post("{:url('admin/Adds/texts')}",values).then(res=>{
+                    console.log(res);
+                }).catch(red=>{
+                    console.log(red);
+                });
+            },
+            onRead(file) {
+                console.log(file);//file文件如下图
+                var formData = new FormData(); //构造一个 FormData，把后台需要发送的参数添加
+                formData.append('file', file.file); //接口需要传的参数
+                axios.post("{:url('admin/Adds/img')}", formData).then(res => {
+                    // console.log(res,111111);
+                    console.log(res);
+                    // let str = res.response_data[0];
+                    // this.uploadImages.push(str);//将图片地址存入一个数组中
+                });
+            },
+
+
+        }
+    });
+</script>
+</html>

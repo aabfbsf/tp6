@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/static/clear/clear.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <link rel="stylesheet" href="/static/clear/clear.css">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="/static/js/jq.js"></script>
+    <link  href="/static/layui/css/layui.mobile.css">
+    <script src="/static/layui/layui.all.js"></script>
+</head>
+<style>
+    * {
+        font-family: 'Roboto', arial, helvetica, sans-serif;
+        /*font-family: "Microsoft Yahei",serif;*/
+    }
+
+    .top-img {
+        margin-top: .2rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: .2rem;
+    }
+
+    .top-img>img {
+        width: .5rem;
+        height: .5rem;
+
+    }
+
+    .bottom-icon>div>i>img {
+        background-color: #ffe60f;
+        padding: 0.1875rem;
+        border-radius: 0.24375rem;
+    }
+
+    .top-span {
+        font-size: .45rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        font-weight: bold;
+        color: #333333;
+    }
+
+    .top-span>span {
+        margin-top: 0.125rem;
+        font-size: .2rem;
+        color: #a3a3a3;
+        font-weight: 400;
+    }
+
+    .top-n>img {
+        width: .5rem;
+        height: .5rem;
+    }
+
+    .PalaceHotel>div>div>i>img {
+        width: .5rem;
+        height: .5rem;
+    }
+
+    .PalaceHotel>div>div>span {
+        margin-top: 0.125rem;
+
+    }
+
+    .PalaceHotel>div>div>span {
+        font-size: .16rem;
+        font-weight: 500;
+    }
+
+    .Split {
+        margin-top: 0;
+    }
+
+    .dealLevel>span {
+        font-size: .35rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 0.1875rem;
+    }
+
+    .PalaceHotel_2_1>div>i>img {
+        z-index: 1;
+        background: #ff5023;
+        padding: 0.125rem;
+        border-radius: 45%;
+    }
+
+    .PalaceHotel_2_2>div>i>img {
+        z-index: 1;
+        background: #079bff;
+        padding: 0.125rem;
+        border-radius: 45%;
+
+    }
+
+    .PalaceHotel_2_3>div>i>img {
+        z-index: 1;
+        background: #ffb60f;
+        padding: 0.125rem;
+        border-radius: 45%;
+    }
+
+    .PalaceHotel_2>div>i>span {
+        font-size: .24rem;
+        font-weight: 400;
+        color: #a3a3a3;
+    }
+
+    .people-img>img {
+        width: .45rem;
+        height: .45rem;
+    }
+
+    .people-img {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: .2rem;
+        align-items: center;
+    }
+
+    .people-2 {
+        font-size: .3rem;
+        color: #333333;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .people-3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .people-3>button>>>span {
+        padding: 0.125rem;
+
+
+    }
+
+    .people-3>button>div>span {
+        color: #333333;
+        font-size: 0.1875rem;
+        font-weight: bold;
+    }
+
+    .people-avg {
+        background-color: #fafafa;
+        padding: 0.21875rem;
+        border-radius: 0.25rem;
+    }
+
+    .more {
+        font-size: .33rem;
+        font-weight: bold;
+        padding-left: .35rem;
+        margin-bottom: 0.3125rem;
+    }
+
+    .more-grid>div>div>i>img {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+
+    .more-grid>div>div>span {
+        font-size: .2rem;
+    }
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .block {
+        width: auto;
+        height: auto;
+        background-color: #fff;
+    }
+    .upimg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .upimg>input{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: .3rem;
+    }
+</style>
+<body>
+<div id="one">
+    <!--头部设置-->
+    <van-row type="flex" justify="center">
+        <van-col span="24" class="top-img">
+            <img src="/static/img/svg/设 置.svg" alt="#">
+        </van-col>
+    </van-row>
+    <!--头像-->
+    <van-row type="flex" justify="center" style="text-align: center;">
+
+        <van-col span="6">
+            <!--头像部分-->
+            <van-image width="1.5rem" height="1.5rem" round fit="cover" src="{$user.img}" @click="show=!show" ></van-image>
+            <van-popup v-model="show" round position="bottom" :style="{ height: '30%' }">
+                <form action="{:url('upload/upload/upload')}" enctype="multipart/form-data" method="post" class="upimg">
+                    <input type="file" name="image" /> <br>
+                    <input type="submit" value="上传" />
+                </form>
+            </van-popup>
+        </van-col>
+
+        <van-col span="14" class="top-span">
+            <!--用户名-->
+            <p>{$user.username}</p>
+            <!--会员名-->
+            <span>会员名:xh{$user.id}pof</span>
+        </van-col>
+        <van-col span="4" class="top-n" id="imgs">
+            <img src="/static/img/svg/右.svg" alt="#">
+        </van-col>
+
+    </van-row>
+    <!--第二部分 四个宫格-->
+    <van-grid :border="false" class="PalaceHotel">
+        <van-grid-item icon="/static/img/svg/my收藏.svg" text="收藏" :badge="RecordData_1" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/历史记录2.svg" text="历史浏览" :badge="RecordData_2" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/关注.svg" text="关注" :badge="RecordData_3" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/粉丝.svg" text="粉丝" :badge="RecordData_4" ></van-grid-item>
+    </van-grid>
+    <!--第三部分 分割线-->
+    <van-divider :style="{padding: '0 16px' ,border:'5px solid #fafafa'}" class="Split" v-once>
+    </van-divider>
+    <!--第四部分 我的交易-->
+    <van-row>
+        <van-col span="24" class="dealLevel">
+            <span>我的交易</span>
+        </van-col>
+    </van-row>
+    <van-grid :column-num="3" :border="false" class="PalaceHotel_2">
+        <van-grid-item icon="/static/img/svg/发布商品.svg" text="我发布的" class="PalaceHotel_2_1"></van-grid-item>
+        <van-grid-item icon="/static/img/svg/我卖出的.svg" text="我卖出的" class="PalaceHotel_2_2"></van-grid-item>
+        <van-grid-item icon="/static/img/svg/我买到的.svg" text="我买到的" class="PalaceHotel_2_3"></van-grid-item>
+    </van-grid>
+    <!--第四步end-->
+    <!--第五步 身份信息-->
+    <van-row type="flex" justify="center">
+        <van-col span="22">
+            <van-row type="flex" justify="center" class="people-avg">
+                <van-col span="4" class="people-img">
+                    <img src="/static/img/svg/人头.svg" alt="">
+                </van-col>
+                <van-col span="15" class="people-2">
+                    <span>您需先认证真实身份才能交易</span>
+                </van-col>
+                <van-col span="5" class="people-3">
+                    <van-button type="primary" round="true" text="去认证" size="mini" color="#ffffff"></van-button>
+                </van-col>
+            </van-row>
+        </van-col>
+    </van-row>
+    <!--第五步 结束-->
+    <!--第六步 分割线-2-->
+    <van-divider></van-divider>
+    <!--第六步 结束-->
+    <!--第七步 更多-->
+    <van-row>
+        <van-col span="24" class="more">
+            <span>更多</span>
+        </van-col>
+    </van-row>
+    <!--第七步 结束-->
+    <!--第八步 多宫格-->
+    <van-grid :column-num="4" square :border="false" class="more-grid">
+        <van-grid-item icon="/static/img/svg/信息发布.svg" text="信息发布规范" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/创作中心.svg" text="会玩创作中心" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/我的贴子.svg" text="我的帖子" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/我的游戏.svg" text="我的游戏" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/租.svg" text="我租到的" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/拍卖.svg" text="我的拍卖" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/租房.svg" text="我的租房" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/我的红包.svg" text="我的红包" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/安全中心.svg" text="安全中心" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/客服中心.svg" text="客服中心" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/认证.svg" text="认证招商" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/通行证.svg" text="实人通行证"></van-grid-item>
+        <van-grid-item icon="/static/img/svg/公约制度.svg" text="闲鱼公约" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/物流.svg" text="物流权益" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/送.svg" text="参与的免费送" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/上涨.svg" text="助卖宝卡" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/钱包.svg" text="天天赚钱"></van-grid-item>
+        <van-grid-item icon="/static/img/svg/家族.svg" text="闲鱼family" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/鱼.svg" text="鱼力行动" ></van-grid-item>
+    </van-grid>
+    <!--第八步 结束-->
+    <!--最后一部分底部导航栏-->
+    <!--监听事件-->
+    <van-tabbar v-model="active2" active-color="#ffe60f" style="bottom: 0;" placeholder="true">
+        <van-tabbar-item icon="/static/img/svg/主页.svg" url="{:url('admin/Index/index')}">咸鱼</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/圆.svg" url="{:url('admin/Hw/index')}">会玩</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/加.svg" class="bottom-icon" url="{:url('admin/Adds/index')}"></van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/消 息.svg" badge=5 url="{:url('admin/Xiaoxi/index')}">消息</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/我 的.svg" to="My" url="{:url('admin/My/index')}">我的</van-tabbar-item>
+    </van-tabbar>
+</div>
+</body>
+<script>
+    $(function(){
+       $("#imgs").click(function(){
+            $.ajax({
+                url:"{:url('admin/My/zx')}",
+                success:function(data){
+                    if(data==='success'){
+                        layer.msg('注销成功~');
+                        setTimeout(()=>{
+                            window.location.href="{:url('admin/Index/index')}";
+                        },2000);
+                    }
+                }
+            })
+       });
+    });
+    new Vue({
+        el:"#one",
+        data(){
+            return{
+                num: 5,
+                active2: 4,
+                RecordData_1: "",
+                RecordData_2: "",
+                RecordData_3: "",
+                RecordData_4: "",
+                user_img:'',
+                username:"",
+                password:"",
+                shows:false,
+                uploader: [{ url: '' }],
+                fileList: [
+
+                ],
+                fileimg:'null',
+                showPopover: false,
+                // 通过 actions 属性来定义菜单选项
+                actions: [{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }],
+                show:false,
+                userInfo:'',
+
+            };
+
+        },
+        methods:{
+            imgup:function(){
+               this.shows=!this.shows;
+            },
+            afterRead(file) {
+                console.log(file);
+                this.headImg = file.file;
+                let formData = new FormData();
+                formData.append("file", file.file);
+                axios
+                    .post("{:url('upload/upload/upload')}", formData, {
+                        headers: {
+                            //添加请求头
+                            "Content-Type": "multipart/form-data",
+                        },
+                    })
+                    .then((res) => {
+                        console.log(res);
+                    }).catch(e=>{
+                    console.log(e);
+                });},
+            onSelect(action) {
+                Toast(action.text);
+            },
+
+        },
+    });
+</script>
+</html>

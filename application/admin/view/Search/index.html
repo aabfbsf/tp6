@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/static/clear/clear.js"></script>
+    <script src="/static/js/vue.js"></script>
+
+    <link rel="stylesheet" href="/static/clear/clear.css">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="/static/js/jq.js"></script>
+    <script src="/static/js/axios.js"></script>
+    <link  href="/static/layui/css/layui.mobile.css">
+    <script src="/static/layui/layui.all.js"></script>
+</head>
+<style>
+    * {
+        text-align: center;
+        position: relative;
+    }
+
+    .t-1 {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .t-2 {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .t-cet {
+        background: none;
+        border: none;
+    }
+
+    .t-1>img {
+        width: .6rem;
+        height: .6rem;
+        margin: 0 0.25rem 0 0.25rem;
+    }
+
+    .t-2>img {
+        width: .38rem;
+        height: .38rem;
+        margin: 0 0.25rem 0 0.25rem;
+    }
+
+    .van-search__content {
+        border: 0.05625rem solid #ffdf00;
+
+    }
+
+    .van-search__content--round {
+        background-color: none;
+    }
+
+    .span {
+        font-size: 0.28125rem;
+    }
+
+    .text>div>div>.van-grid-item__text {
+        font-size: 0.28125rem;
+        color: #a3a3a3;
+    }
+
+    .four-span {
+        font-size: .4rem;
+        font-weight: bold;
+    }
+
+    .four-img {
+        margin: 0.0625rem;
+    }
+
+    .four-img>img {}
+
+    .four-span-2 {
+        font-weight: bold;
+        color: #fe4543;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .four-span-3 {
+        color: #a3a3a3;
+        font-size: .2rem;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .four-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .imgs {
+        display: flex;
+        justify-content: flex-start;
+        border-radius: 50%;
+        width: auto;
+    }
+
+    .imgs-span {
+        width: 100%;
+        color: #a4a4a4;
+        font-size: .2rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .shop-img>img {
+        background: blue;
+        border-radius: 50%;
+    }
+
+    .bottom-icon>div>i>img {
+        background-color: #ffe60f;
+        padding: 0.1875rem;
+        border-radius: 0.24375rem;
+    }
+
+    .search-border>* {
+        background: none;
+    }
+
+    .icon-2>div>i>img {
+        /* background-color: red; */
+        padding: 0.125rem;
+        border-radius: 50%;
+    }
+
+    .icon-2-1>div>i>img {
+        background-color: #ff9b11;
+    }
+
+    .icon-2-2>div>i>img {
+        background-color: #e49753;
+    }
+
+    .icon-2-3>div>i>img {
+        background-color: #fe5126;
+    }
+
+    .icon-2-4>div>i>img {
+        background-color: #d134ff;
+    }
+
+    .icon-2-5>div>i>img {
+        background-color: #ffe610;
+    }
+
+    .text>* {
+        border: none;
+    }
+</style>
+<body>
+<div id="one">
+    <!--顶部-->
+    <van-row type="flex" justify="center" align="center">
+        <van-col span="7" class='t-1'>
+            <img src="/static/img/svg/签到.svg" alt="">
+        </van-col>
+        <!--中间部分-->
+        <van-col span="10">
+            <van-tabbar v-model="active" class="t-cet">
+                <van-tabbar-item>
+                    <span class="span">关注</span>
+                </van-tabbar-item>
+                <van-tabbar-item>
+                    <span class="span">推荐</span>
+                </van-tabbar-item>
+                <van-tabbar-item>
+                    <span class="span">昆明</span>
+                </van-tabbar-item>
+            </van-tabbar>
+        </van-col>
+        <!--中间end-->
+        <van-col span="7" class="t-2">
+            <img src="/static/img/svg/扫码.svg" alt="">
+        </van-col>
+    </van-row>
+    <!--第二部分-搜索-->
+    <van-search class="search-border" show-action v-model="value" shape="round" placeholder="电脑主机 | 手表男"   @search="onSearch()"></van-search>
+    <!--第三个部分5个图-->
+    <van-grid :column-num="5" class="text">
+        <van-grid-item icon="/static/img/svg/二手.svg" text="二手手机" class="icon-2-1 icon-2" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/奢侈品.svg" text="奢侈品" class="icon-2-2 icon-2"></van-grid-item>
+        <van-grid-item icon="/static/img/svg/游戏.svg" text="游戏" class="icon-2-3 icon-2" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/玩具熊.svg" text="次元新潮" class="icon-2-4 icon-2" ></van-grid-item>
+        <van-grid-item icon="/static/img/svg/分类.svg" text="分类" class="icon-2-5 icon-2" ></van-grid-item>
+    </van-grid>
+    <!--第四个部分商品-->
+    <!--通过php获取数据进行遍历-->
+    <template>
+        <van-row type="flex" justify="space-around">
+            {volist name="user" id='name' key='k'}
+            <van-col span="10" class="four-img" id="i{$k}">
+                <van-image class="shop-img" width="3rem" height="3rem"  src="{$name.i}" ></van-image>
+                <van-skeleton title avatar :row="3" :loading="loading">
+                    <p class="four-span" style="margin-bottom: .1rem">{$name.b}</p>
+                    <div class="four-div">
+                        <span class="four-span four-span-2" >￥{$name.q}</span>
+                        <span class="four-span-3" style="margin-top: .1rem"><span>{$name.a}</span></span>
+                    </div>
+                    <div style="display: inline-block;justify-content: center;align-items: center;margin-top: .15rem" class="subs">
+                        <span class="imgs-span" style="margin-bottom: .1rem">简介:{$name.j}</span>
+                        <span class="imgs-span" style="margin-bottom: .1rem">用户:{$name.n}</span>
+                        <span class="imgs-span">联系人:{$name.p}</span>
+                    </div>
+                </van-skeleton>
+            </van-col>
+            {/volist}
+        </van-row>
+    </template>
+    <!--最后一部分底部导航栏-->
+    <!--监听事件-->
+    <van-tabbar v-model="active2" active-color="#ffe60f" style="bottom: 0;" placeholder="true">
+        <van-tabbar-item icon="/static/img/svg/主页.svg" url="{:url('admin/Index/index')}">咸鱼</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/圆.svg" url="{:url('admin/Hw/index')}">会玩</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/加.svg" class="bottom-icon" url="{:url('admin/Adds/index')}"></van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/消 息.svg" badge=5 url="{:url('admin/Xiaoxi/index')}">消息</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/我 的.svg" to="My" url="{:url('admin/My/index')}">我的</van-tabbar-item>
+    </van-tabbar>
+
+</div>
+</body>
+<script>
+
+    $(function(){
+        $(".four-img").click(function(){
+            var a=$(this)[0].id.split('i')[1];
+            $.ajax({
+                url:"{:url('admin/Fl/index')}",
+                data:{search:a},
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        });
+    });
+    new Vue({
+        el:"#one",
+        data(){
+            return{
+                active: 1,
+                active2: 0,
+                status: null,
+                value: null,
+                shop_img: '',
+                loading: false,
+            }
+        },
+        methods:{
+            onSearch(val) {
+                console.log(val);
+            },
+        },
+    });
+</script>
+</html>

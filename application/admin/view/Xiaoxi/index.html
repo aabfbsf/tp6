@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/static/clear/clear.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <link rel="stylesheet" href="/static/clear/clear.css">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+</head>
+<style>
+
+    .bottom-icon>div>i>img {
+        background-color: #ffe60f;
+        padding: 0.1875rem;
+        border-radius: 0.24375rem;
+    }
+</style>
+<body>
+<div id="two">
+    <van-tabbar v-model="active2" active-color="#ffe60f" style="bottom: 0;" placeholder="true">
+        <van-tabbar-item icon="/static/img/svg/主页.svg" url="{:url('admin/Index/index')}">咸鱼</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/圆.svg" url="{:url('admin/Hw/index')}">会玩</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/加.svg" class="bottom-icon" url="{:url('admin/Adds/index')}"></van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/消 息.svg" badge=5 url="{:url('admin/Xiaoxi/index')}">消息</van-tabbar-item>
+        <van-tabbar-item icon="/static/img/svg/我 的.svg" to="My" url="{:url('admin/My/index')}">我的</van-tabbar-item>
+    </van-tabbar>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#two",
+        data(){
+            return{
+                active2:3,
+            }
+        },
+        methods:{
+
+        },
+    });
+</script>
+</html>
